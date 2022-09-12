@@ -22,6 +22,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
+        sceneView.autoenablesDefaultLighting = true
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,13 +35,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if let imagesToTrack = ARReferenceImage.referenceImages(inGroupNamed: "Pokemon Cards", bundle: Bundle.main) {
             
             configuration.trackingImages = imagesToTrack
-            configuration.maximumNumberOfTrackedImages = 1
+            configuration.maximumNumberOfTrackedImages = 2
             
             print("Images Successfully Added")
         }
-        
-        
-        
 
         // Run the view's session
         sceneView.session.run(configuration)
@@ -69,6 +68,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             planeNode.eulerAngles.x = -Float.pi / 2
             
             node.addChildNode(planeNode)
+            
+            if imageAnchor.referenceImage.name == "corphish-card" {
+                if let pokeScene = SCNScene(named: "art.scnassets/vaporeon.scn") {
+                    if let pokeNode = pokeScene.rootNode.childNodes.first {
+                        pokeNode.eulerAngles.x = Float.pi / 2
+                        planeNode.addChildNode(pokeNode)
+                    }
+                }
+            }
+            
+            if imageAnchor.referenceImage.name == "diglett-card" {
+                if let pokeScene = SCNScene(named: "art.scnassets/diglett.scn") {
+                    if let pokeNode = pokeScene.rootNode.childNodes.first {
+                        pokeNode.eulerAngles.x = Float.pi / 2
+                        planeNode.addChildNode(pokeNode)
+                    }
+                }
+            }
         }
         
         return node

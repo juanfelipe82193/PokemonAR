@@ -6,6 +6,9 @@
   "resources" : [
     {
       "filename" : "corphish-card.arreferenceimage"
+    },
+    {
+      "filename" : "diglett-card.arreferenceimage"
     }
   ]
 }
